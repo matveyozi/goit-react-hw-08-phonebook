@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import cssModule from './ContactForm.module.css'
 import { useDispatch } from 'react-redux';
 import {  useState } from 'react';
-import { addContact } from 'redux/operations';
+import { addContact } from 'redux/contacts/operations';
 
 
  const ContactForm = () => {

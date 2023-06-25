@@ -1,7 +1,7 @@
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 import { combineReducers } from '@reduxjs/toolkit';
-import { filtersReducer } from './filtersSlice';
-import { contactsReducer } from './contactsSlice';
+import { filtersReducer } from './filters/filtersSlice';
+import { contactsReducer } from './contacts/contactsSlice';
 import { persistReducer } from 'redux-persist';
 
 const rootReducer = combineReducers({

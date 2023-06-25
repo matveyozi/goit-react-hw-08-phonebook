@@ -2,7 +2,7 @@ import React from 'react'
 import TextField from '@mui/material/TextField';
 import cssModule from './Filter.module.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { setStatusFilter } from 'redux/filtersSlice';
+import { setStatusFilter } from 'redux/filters/filtersSlice';
 import { selectFilter } from 'redux/selectors';
 
 const Filter = () => {
