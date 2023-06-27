@@ -1,12 +1,15 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import cssModule from './ContactForm.module.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {  useState } from 'react';
-import { addContact } from 'redux/contacts/operations';
+import { addContact } from 'redux/contacts/contactsOperations';
+import { selectContacts } from 'redux/selectors';
 
 
- const ContactForm = () => {
+const ContactForm = () => {
+	const contacts = useSelector(selectContacts); 
+
 	 const [isDisabled, setIsDisabled] = useState(true);
 	 const [name, setName] = useState('');
 	 const [number, setNumber] = useState('');
@@ -14,17 +17,20 @@ import { addContact } from 'redux/contacts/operations';
 	 
 	 const dispatch = useDispatch();
 
-	const onSubmitForm = e => {
-	  e.preventDefault();
-	  const form = e.target;
-	  const name = e.target.name.value;
-	  const number = e.target.number.value;
-  
-	  dispatch(addContact({name, number}));
-		
-		form.reset();
-		setIsDisabled(true)
-	};
+	 const onSubmitForm = e => {
+		 e.preventDefault();
+		 const newContact = {
+			 name,
+			 number
+		 };
+		 if (checkNewNameRepeate(name)) {
+			 alert(`${name} is already in contacts!`);
+		 } else {
+			 dispatch(addContact(newContact));
+			 setName('');
+			 setNumber('');
+		 }
+	 };
   
 	const onChangeInput = (e)=> {
 		switch (e.target.name) {
@@ -43,8 +49,14 @@ import { addContact } from 'redux/contacts/operations';
 		} else setIsDisabled(true);	
 	}
 
-	
+	 const checkNewNameRepeate = newName => {
+		 let arrayOfNamesInLowerCase = contacts.map(item =>
+			 item.name.toLocaleLowerCase()
+		 );
+		 return arrayOfNamesInLowerCase.includes(newName.toLocaleLowerCase());
+	 };
 
+	 
 	return (
 		<form className={cssModule.form} onSubmit={onSubmitForm} action="">
 			<TextField onChange={onChangeInput} type='text' 
