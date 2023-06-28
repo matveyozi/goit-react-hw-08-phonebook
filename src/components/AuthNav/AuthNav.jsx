@@ -16,16 +16,3 @@ const AuthNav = () => {
 };
 
 export default AuthNav;
-
-// .........
-
-
-
-function sort(students) {
-  return students.reduce((acc, el, ind) => {
-    el.age > students[ind - 1]?.age
-      ? acc.splice(ind, 0, el)
-      : acc.splice(ind - 1, 0, el)
-    return acc
-  }, [])
-}
